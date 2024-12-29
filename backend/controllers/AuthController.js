@@ -24,43 +24,46 @@ const signup = async (req, res) => {
             message: error.message || "Internal Server Error",
             success: false,
         });
-    }   
+    }
 }
 
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log("Request received:", { email, password }); // Debug input
         const user = await User.findOne({ email });
-        const errMsg = "Auth failed email or  password is wrong";
+        const errMsg = "Auth failed: email or password is wrong";
         if (!user) {
-            return res.status(403)
-                .json({ message: errMsg, success: false });
+            return res.status(403).json({ message: errMsg, success: false });
         }
+
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
-            return res.status(403)
-                .json({ message: errMsg, success: false });
+            return res.status(403).json({ message: errMsg, success: false });
         }
+
         const jwtToken = jwt.sign(
             { email: user.email, _id: user._id },
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
-        )
-        res.status(200)
-            .json({
-                message: "Login successfully ",
-                success: true,
-                jwtToken,
-                email,
-                name: user.name
-            })
+        );
+
+        res.status(200).json({
+            message: "Login successfully",
+            success: true,
+            jwtToken,
+            email,
+            name: user.name
+        });
     } catch (error) {
-        res.status(500)
-            .json({
-                message: "internal Server  Error ", success: false
-            })
+        console.error("Login error:", error); // Log detailed error
+        res.status(500).json({
+            message: "Internal Server Error",
+            success: false
+        });
     }
-}
+};
+
 
 module.exports = {
     signup,
