@@ -31,17 +31,21 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         console.log("Request received:", { email, password }); // Debug input
+        
         const user = await User.findOne({ email });
-        const errMsg = "Auth failed: email or password is wrong";
+        const errMsg = "Auth failed: email or password is incorrect";
+        
         if (!user) {
+            console.log("User not found:", email);
             return res.status(403).json({ message: errMsg, success: false });
         }
-
+        
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
+            console.log("Password mismatch for user:", email);
             return res.status(403).json({ message: errMsg, success: false });
         }
-
+        
         const jwtToken = jwt.sign(
             { email: user.email, _id: user._id },
             process.env.JWT_SECRET,
@@ -49,7 +53,7 @@ const login = async (req, res) => {
         );
 
         res.status(200).json({
-            message: "Login successfully",
+            message: "Login successful",
             success: true,
             jwtToken,
             email,
