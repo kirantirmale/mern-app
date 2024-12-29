@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { handleError, handleSuccess } from '../utils';
 
 function Login() {
+
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -21,6 +23,8 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        
         const { email, password } = formData;
 
         if (!email || !password) {
@@ -38,8 +42,12 @@ function Login() {
 
             const result = await response.json();
             const { success, message, error } = result;
+            if (!response.ok) {
+                return handleError(result.message || 'Login failed');
+            }
+            
             if (response.ok) {
-                localStorage.setItem('token', result.jwtToke);
+                localStorage.setItem('token', result.jwtToken);
                 localStorage.setItem('LoggedInUser', result.name);
                 handleSuccess(message);
                 setTimeout(() => {
@@ -48,7 +56,7 @@ function Login() {
             } else if (error) {
                 const detail = error?.details[0].message;
                 handleError(detail);
-            }   
+            }
             else if (!success) {
                 handleError(message);
             }
@@ -56,6 +64,7 @@ function Login() {
             handleError(error.message || 'Something went wrong');
             toast.error(error.message || 'Something went wrong');
         }
+        setLoading(false);
     };
 
     return (
@@ -103,10 +112,11 @@ function Login() {
                                 </Link>
                             </div>
                             <button
+                            disabled={loading}
                                 type="submit"
                                 className="w-full bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 bg-blue-500 hover:bg-blue-700 text-white rounded"
                             >
-                                Sign in
+                                 {loading ? "Signing in..." : "Sign in"}
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Don’t have an account yet?{' '}
