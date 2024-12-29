@@ -23,4 +23,14 @@ app.get('/ping', (req, res) => {
 
 server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
+}).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.log(`Port ${port} is in use. Trying another port...`);
+        const newPort = Math.floor(Math.random() * (65535 - 1024 + 1)) + 1024;
+        server.listen(newPort, () => {
+            console.log(`Server running on http://localhost:${newPort}`);
+        });
+    } else {
+        console.error('Server error:', err);
+    }
 });
