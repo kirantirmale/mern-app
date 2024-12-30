@@ -18,11 +18,35 @@ function Contact() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission (e.g., send formData to server)
-        console.log(formData);
+    
+        try {
+            const response = await fetch('https://mern-app-api-xi.vercel.app/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData), // Send the form data
+            });
+    
+            const result = await response.json();
+    
+            if (response.ok) {
+                console.log('Form submitted successfully:', result);
+                // Optionally, show a success message to the user
+                alert('Thank you for contacting us. We will get back to you shortly!');
+            } else {
+                console.error('Error submitting form:', result.message);
+                // Optionally, show an error message to the user
+                alert('There was an issue submitting your form. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the form. Please try again later.');
+        }
     };
+    
 
     return (
         <>
