@@ -9,7 +9,7 @@ function Contact() {
         email: '',
         phoneNumber: '',
         message: '',
-      
+        country: 'IN',  // Default country can be updated here
     });
 
     const handleChange = (e) => {
@@ -38,6 +38,16 @@ function Contact() {
                 console.log('Form submitted successfully:', result);
                 // Show success toast
                 toast.success('Thank you for contacting us. We will get back to you shortly!');
+                
+                // Reset form fields after successful submission
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phoneNumber: '',
+                    message: '',
+                    country: 'IN',  // Default country reset
+                });
             } else {
                 console.error('Error submitting form:', result.message);
                 // Show error toast
@@ -49,15 +59,14 @@ function Contact() {
             toast.error('An error occurred while submitting the form. Please try again later.');
         }
     };
-    
 
     return (
         <>
-            <div className=" p-5">
+            <div className="p-5">
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contact sales</h2>
                 </div>
-                <form onSubmit={handleSubmit} method="POST" className="mx-auto  max-w-xl sm:mt-20">
+                <form onSubmit={handleSubmit} method="POST" className="mx-auto max-w-xl sm:mt-20">
                     <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
                             <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900">
@@ -123,7 +132,7 @@ function Contact() {
                                             className="col-start-1 row-start-1 w-full appearance-none rounded-md py-2 pl-3.5 pr-7 text-base text-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                             value={formData.country}
                                             onChange={handleChange}
-                                            >
+                                        >
                                             <option>IN</option>
                                             <option>US</option>
                                             <option>EU</option>
@@ -167,7 +176,6 @@ function Contact() {
                         </button>
                     </div>
                 </form>
-
             </div>
             <ToastContainer />
         </>
