@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify'; // Import react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Import the toastify CSS
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -7,7 +9,7 @@ function Contact() {
         email: '',
         phoneNumber: '',
         message: '',
-        country: 'US',
+      
     });
 
     const handleChange = (e) => {
@@ -34,16 +36,17 @@ function Contact() {
     
             if (response.ok) {
                 console.log('Form submitted successfully:', result);
-                // Optionally, show a success message to the user
-                alert('Thank you for contacting us. We will get back to you shortly!');
+                // Show success toast
+                toast.success('Thank you for contacting us. We will get back to you shortly!');
             } else {
                 console.error('Error submitting form:', result.message);
-                // Optionally, show an error message to the user
-                alert('There was an issue submitting your form. Please try again.');
+                // Show error toast
+                toast.error('There was an issue submitting your form. Please try again.');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred while submitting the form. Please try again later.');
+            // Show error toast
+            toast.error('An error occurred while submitting the form. Please try again later.');
         }
     };
     
@@ -120,9 +123,9 @@ function Contact() {
                                             className="col-start-1 row-start-1 w-full appearance-none rounded-md py-2 pl-3.5 pr-7 text-base text-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                             value={formData.country}
                                             onChange={handleChange}
-                                        >
+                                            >
+                                            <option>IN</option>
                                             <option>US</option>
-                                            <option>CA</option>
                                             <option>EU</option>
                                         </select>
 
@@ -164,7 +167,9 @@ function Contact() {
                         </button>
                     </div>
                 </form>
+
             </div>
+            <ToastContainer />
         </>
     );
 }
