@@ -6,36 +6,59 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Skills from './pages/Skills';
 import RefreshHandler from './RefreshHandler';
-import Header from './components/Header'; // Import Header
-import Footer from './components/Footer'; // Import Footer
+import Header from './components/Header'; 
+import Footer from './components/Footer'; 
 import Contact from './pages/Contact';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const PrivateRoute = ({ element }) => {
-    return isAuthenticated ? element : <Navigate to="/login" />;
+  // Refactor PrivateRoute logic for clarity
+  const PrivateRoute = ({ children }) => {
+    return isAuthenticated ? children : <Navigate to="/login" />;
   };
 
   return (
     <div className="flex flex-col min-h-screen">
       <RefreshHandler setIsAuthenticated={setIsAuthenticated} />
-      
-      {/* Conditionally render Header and Footer */}
-      {isAuthenticated && <Header />} {/* Show Header only if authenticated */}
-      
+    
+      {isAuthenticated && <Header />} 
+
       <main className="flex-grow p-4">
         <Routes>
-          <Route path='/' element={<Navigate to={'/login'} />} />
+          <Route path='/' element={<Navigate to='/login' />} />
           <Route path='/login' element={<Login setIsAuthenticated={setIsAuthenticated} />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/home' element={<PrivateRoute element={<Home />} />} />
-          <Route path='/skills' element={<PrivateRoute element={<Skills />} />} />
-          <Route path='/contact' element={<PrivateRoute element={<Contact />} />} />
+          
+          {/* Use PrivateRoute to wrap protected routes */}
+          <Route 
+            path='/home' 
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route 
+            path='/skills' 
+            element={
+              <PrivateRoute>
+                <Skills />
+              </PrivateRoute>
+            }
+          />
+          <Route 
+            path='/contact' 
+            element={
+              <PrivateRoute>
+                <Contact />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </main>
       
-      {isAuthenticated && <Footer />} {/* Show Footer only if authenticated */}
+      {isAuthenticated && <Footer />} 
     </div>
   );
 }
