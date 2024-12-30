@@ -1,4 +1,4 @@
-// require('dotenv').config(); // Ensure this is at the top of your entry file
+
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -30,22 +30,27 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log("Request received:", { email, password }); // Debug input
-        
+        console.log("Request received:", { email, password });
+
         const user = await User.findOne({ email });
         const errMsg = "Auth failed: email or password is incorrect";
-        
+
         if (!user) {
             console.log("User not found:", email);
             return res.status(403).json({ message: errMsg, success: false });
         }
-        
+
         const isPassEqual = await bcrypt.compare(password, user.password);
         if (!isPassEqual) {
             console.log("Password mismatch for user:", email);
             return res.status(403).json({ message: errMsg, success: false });
         }
-        
+
+        if (!process.env.JWT_SECRET) {
+            console.error("JWT_SECRET is undefined");
+            return res.status(500).json({ message: "Server misconfiguration", success: false });
+        }
+
         const jwtToken = jwt.sign(
             { email: user.email, _id: user._id },
             process.env.JWT_SECRET,
@@ -60,9 +65,9 @@ const login = async (req, res) => {
             name: user.name
         });
     } catch (error) {
-        console.error("Login error:", error); // Log detailed error
+        console.error("Login error:", error.message, error.stack);
         res.status(500).json({
-            message: "Internal Server Error",
+            message: error.message || "Internal Server Error",
             success: false
         });
     }

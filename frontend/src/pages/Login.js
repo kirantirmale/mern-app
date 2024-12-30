@@ -1,69 +1,69 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { handleError, handleSuccess } from '../utils';
+    import React, { useState } from 'react';
+    import { Link, useNavigate } from 'react-router-dom';
+    import { ToastContainer, toast } from 'react-toastify';
+    import 'react-toastify/dist/ReactToastify.css';
+    import { handleError, handleSuccess } from '../utils';
 
-function Login() {
+    function Login() {
 
-    const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
-    const navigate = useNavigate();
+        const [loading, setLoading] = useState(false);
+        const [formData, setFormData] = useState({
+            email: '',
+            password: '',
+        });
+        const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
+        const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-    
-        const { email, password } = formData;
-    
-        if (!email || !password) {
-            toast.error('Both fields are required!');
-            setLoading(false);
-            return;
-        }
-    
-        try {
-            const response = await fetch('https://mern-app-api-xi.vercel.app/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-    
-            const result = await response.json();
-            if (!response.ok) {
-                console.log("API error response:", result);
-                return handleError(result.message || 'Login failed');
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            setLoading(true);
+        
+            const { email, password } = formData;
+        
+            if (!email || !password) {
+                toast.error('Both fields are required!');
+                setLoading(false);
+                return;
             }
-    
-            const { jwtToken, name, message } = result;
-            localStorage.setItem('token', jwtToken);
-            localStorage.setItem('LoggedInUser', name);
-            handleSuccess(message);
-            setTimeout(() => {
-                navigate('/home');
-            }, 1000);
-        } catch (error) {
-            console.error("Frontend error:", error);
-            handleError(error.message || 'Something went wrong');
-            toast.error(error.message || 'Something went wrong');
-        } finally {
-            setLoading(false);
-        }
-    };
-    
+        
+            try {
+                const response = await fetch('https://mern-app-api-xi.vercel.app/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+        
+                const result = await response.json();
+                if (!response.ok) {
+                    console.log("API error response:", result);
+                    return handleError(result.message || 'Login failed');
+                }
+        
+                const { jwtToken, name, message } = result;
+                localStorage.setItem('token', jwtToken);
+                localStorage.setItem('LoggedInUser', name);
+                handleSuccess(message);
+                setTimeout(() => {
+                    navigate('/home');
+                }, 1000);
+            } catch (error) {
+                console.error("Frontend error:", error);
+                handleError(error.message || 'Something went wrong');
+                toast.error(error.message || 'Something went wrong');
+            } finally {
+                setLoading(false);
+            }
+        };
+        
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
