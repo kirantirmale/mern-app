@@ -1,15 +1,8 @@
-const nodemailer = require('nodemailer');
+
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'kirantirmale2362001@gmail.com',
-        pass: 'lpeoxqpvvgwavblf'
-    }
-});
 
 const signup = async (req, res) => {
     try {
@@ -17,49 +10,22 @@ const signup = async (req, res) => {
         const user = await User.findOne({ email });
         if (user) {
             return res.status(409)
-                .json({ message: "User already exists, you can login.", success: false });
+                .json({ message: "User is already exist, you can login  ", success: false });
         }
-
         const userModel = new User({ name, email, password });
-        userModel.password = await bcrypt.hash(password, 10);
+        userModel.password = await bcrypt.hash(password, 10)
         await userModel.save();
-
-        // Send email to the user indicating successful signup
-        const mailOptions = {
-            from: 'kirantirmale2362001@gmail.com',
-            to: email,
-            subject: 'Successful Signup on Our Website',
-            html: `<h1>Welcome ${name}!</h1><p>You have successfully signed up to our website. Thank you for joining!</p>`,
-            attachments: [{
-                filename: 'form.html',
-                path: './form.html',
-            }]
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log("Error sending email:", error);
-                return res.status(500).json({
-                    message: "Failed to send email",
-                    success: false
-                });
-            } else {
-                console.log("Email sent: " + info.response);
-            }
-        });
-
         res.status(201)
             .json({
-                message: "Signup successful, a confirmation email has been sent.",
-                success: true
-            });
+                message: "Signup successfully ", success: true
+            })
     } catch (error) {
         res.status(500).json({
             message: error.message || "Internal Server Error",
             success: false,
         });
     }
-};
+}
 
 const login = async (req, res) => {
     try {
@@ -86,10 +52,10 @@ const login = async (req, res) => {
                 success: false
             });
         }
-        // if (!process.env.JWT_SECRET) {
-        //     console.error("JWT_SECRET is undefined");
-        //     return res.status(500).json({ message: "Server misconfiguration", success: false });
-        // }
+        if (!process.env.JWT_SECRET) {
+            console.error("JWT_SECRET is undefined");
+            return res.status(500).json({ message: "Server misconfiguration", success: false });
+        }
         console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
         const jwtToken = jwt.sign(
