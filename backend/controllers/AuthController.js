@@ -45,11 +45,18 @@ const login = async (req, res) => {
             console.log("Password mismatch for user:", email);
             return res.status(403).json({ message: errMsg, success: false });
         }
-
         if (!process.env.JWT_SECRET) {
             console.error("JWT_SECRET is undefined");
-            return res.status(500).json({ message: "Server misconfiguration", success: false });
+            return res.status(500).json({
+                message: "Server misconfiguration: JWT_SECRET is missing",
+                success: false
+            });
         }
+        // if (!process.env.JWT_SECRET) {
+        //     console.error("JWT_SECRET is undefined");
+        //     return res.status(500).json({ message: "Server misconfiguration", success: false });
+        // }
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
         const jwtToken = jwt.sign(
             { email: user.email, _id: user._id },
