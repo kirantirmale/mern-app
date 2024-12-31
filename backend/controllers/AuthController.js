@@ -6,26 +6,28 @@ const jwt = require('jsonwebtoken');
 
 const signup = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        const user = await User.findOne({ email });
-        if (user) {
-            return res.status(409)
-                .json({ message: "User is already exist, you can login  ", success: false });
-        }
-        const userModel = new User({ name, email, password });
-        userModel.password = await bcrypt.hash(password, 10)
-        await userModel.save();
-        res.status(201)
-            .json({
-                message: "Signup successfully ", success: true
-            })
+      const { firstname, lastname, email, password } = req.body;
+  
+      const user = await User.findOne({ email });
+      if (user) {
+        return res.status(409).json({ message: 'User already exists', success: false });
+      }
+  
+      const userModel = new User({
+        firstname,
+        lastname,
+        email,
+        password: await bcrypt.hash(password, 10),
+      });
+  
+      await userModel.save();
+  
+      res.status(201).json({ message: 'Signup successful', success: true });
     } catch (error) {
-        res.status(500).json({
-            message: error.message || "Internal Server Error",
-            success: false,
-        });
+      res.status(500).json({ message: error.message || 'Internal Server Error', success: false });
     }
-}
+  };
+  
 
 const login = async (req, res) => {
     try {
