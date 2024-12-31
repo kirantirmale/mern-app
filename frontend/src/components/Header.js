@@ -11,11 +11,11 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Get full name from localStorage
+
     const fullName = localStorage.getItem('LoggedInUser') || 'Guest';
-    const [first, last] = fullName.split(' '); // Split into first and last name
-    setFirstName(first || ''); // Set first name
-    setLastName(last || ''); // Set last name
+    const [first, last] = fullName.split(' ');
+    setFirstName(first || '');
+    setLastName(last || '');
   }, []);
 
   const toggleMenu = () => {
@@ -28,9 +28,10 @@ function Header() {
 
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <span className="font-semibold text-xl tracking-tight">
-            Welcome, {firstName} {lastName}!
+            Welcome, {firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()}!
           </span>
         </div>
+
 
         <div className="block lg:hidden">
           <button
