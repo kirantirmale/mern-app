@@ -6,11 +6,16 @@ import { teal } from '@mui/material/colors';
 import { Tooltip } from '@mui/material';
 
 function Header() {
-  const [loggedInUser, setLoggedInUser] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setLoggedInUser(localStorage.getItem('LoggedInUser') || 'Guest');
+    // Get full name from localStorage
+    const fullName = localStorage.getItem('LoggedInUser') || 'Guest';
+    const [first, last] = fullName.split(' '); // Split into first and last name
+    setFirstName(first || ''); // Set first name
+    setLastName(last || ''); // Set last name
   }, []);
 
   const toggleMenu = () => {
@@ -22,8 +27,9 @@ function Header() {
       <nav className="flex items-center justify-between flex-wrap">
 
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-
-          <span className="font-semibold text-xl tracking-tight">Welcome, {loggedInUser} !</span>
+          <span className="font-semibold text-xl tracking-tight">
+            Welcome, {firstName} {lastName}!
+          </span>
         </div>
 
         <div className="block lg:hidden">
@@ -37,7 +43,7 @@ function Header() {
         </div>
 
         <div
-          className={`w-full block flex-grow lg:flex lg:items-center text-center  lg:w-auto ${menuOpen ? 'block' : 'hidden'
+          className={`w-full block flex-grow lg:flex lg:items-center text-center lg:w-auto ${menuOpen ? 'block' : 'hidden'
             }`}
         >
           <div className="text-base lg:flex-grow">
@@ -60,23 +66,16 @@ function Header() {
             >
               Contact
             </Link>
-
-
           </div>
           <div>
             <Link to="/profile">
-              <Tooltip title={loggedInUser.toUpperCase()} arrow>
+              <Tooltip title={`${firstName} ${lastName}`} arrow>
                 <Avatar sx={{ bgcolor: teal[600] }}>
-                  {loggedInUser
-                    .split(' ') // Split the full name into parts
-                    .map((name) => name.charAt(0).toUpperCase()) // Get the first character of each part
-                    .slice(0, 2) // Limit to first two characters (first and last name initials)
-                    .join('')} // Combine the initials
+                  {`${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()}
                 </Avatar>
               </Tooltip>
             </Link>
           </div>
-
         </div>
       </nav>
     </header>

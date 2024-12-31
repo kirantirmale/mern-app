@@ -71,7 +71,8 @@ const login = async (req, res) => {
             success: true,
             jwtToken,
             email,
-            name: user.name
+            firstname: user.firstname,
+            lastname: user.lastname,
         });
     } catch (error) {
         console.error("Login error:", error.message, error.stack);

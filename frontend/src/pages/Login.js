@@ -23,15 +23,15 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
+    
         const { email, password } = formData;
-
+    
         if (!email || !password) {
             toast.error('Both fields are required!');
             setLoading(false);
             return;
         }
-
+    
         try {
             const response = await fetch('https://mern-app-api-xi.vercel.app/auth/login', {
                 method: 'POST',
@@ -40,16 +40,16 @@ function Login() {
                 },
                 body: JSON.stringify(formData),
             });
-
+    
             const result = await response.json();
             if (!response.ok) {
                 console.log("API error response:", result);
                 return handleError(result.message || 'Login failed');
             }
-
-            const { jwtToken, name, message } = result;
+    
+            const { jwtToken, firstname = '', lastname = '', message } = result;
             localStorage.setItem('token', jwtToken);
-            localStorage.setItem('LoggedInUser', name);
+            localStorage.setItem('LoggedInUser', `${firstname} ${lastname}`); 
             handleSuccess(message);
             setTimeout(() => {
                 navigate('/home');
@@ -62,6 +62,7 @@ function Login() {
             setLoading(false);
         }
     };
+    
 
     return (
         <section className="bg-teal-500 h-screen w-full flex items-center justify-center relative">
