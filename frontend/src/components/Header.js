@@ -4,6 +4,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import Avatar from '@mui/material/Avatar';
 import { teal } from '@mui/material/colors';
 import { Tooltip } from '@mui/material';
+import logo from '../assets/images/logo-no-background.png'; // Assuming the logo is in this path
 
 function Header() {
   const [firstName, setFirstName] = useState('');
@@ -11,7 +12,6 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-
     const fullName = localStorage.getItem('LoggedInUser') || 'Guest';
     const [first, last] = fullName.split(' ');
     setFirstName(first || '');
@@ -27,11 +27,10 @@ function Header() {
       <nav className="flex items-center justify-between flex-wrap">
 
         <div className="flex items-center flex-shrink-0 text-white mr-6">
-          <span className="font-semibold text-xl tracking-tight">
-            Welcome, {firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase()}!
+          <span className="font-semibold text-xl tracking-tight ml-2">
+            <img src={logo} alt="Logo" className="h-10" />
           </span>
         </div>
-
 
         <div className="block lg:hidden">
           <button
@@ -44,8 +43,7 @@ function Header() {
         </div>
 
         <div
-          className={`w-full block flex-grow lg:flex lg:items-center text-center lg:w-auto ${menuOpen ? 'block' : 'hidden'
-            }`}
+          className={`w-full block flex-grow lg:flex lg:items-center text-center lg:w-auto ${menuOpen ? 'block' : 'hidden'}`}
         >
           <div className="text-base lg:flex-grow">
             <Link
@@ -68,10 +66,10 @@ function Header() {
               Contact
             </Link>
           </div>
-          <div>
+          <div className="flex justify-center items-center mt-4 lg:mt-0 -ml-4">
             <Link to="/profile">
               <Tooltip title={`${firstName} ${lastName}`} arrow>
-                <Avatar sx={{ bgcolor: teal[600] }}>
+                <Avatar sx={{ bgcolor: teal[600] }} className="lg:h-10 lg:w-10 h-12 w-12">
                   {`${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()}
                 </Avatar>
               </Tooltip>

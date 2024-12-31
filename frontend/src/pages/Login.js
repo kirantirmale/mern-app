@@ -47,9 +47,9 @@ function Login() {
                 return handleError(result.message || 'Login failed');
             }
     
-            const { jwtToken, firstname = '', lastname = '', message } = result;
+            const { jwtToken, firstname = '', lastname = '' ,email = '', message } = result;
             localStorage.setItem('token', jwtToken);
-            localStorage.setItem('LoggedInUser', `${firstname} ${lastname}`); 
+            localStorage.setItem('LoggedInUser', `${firstname} ${lastname} ,${email}`); 
             handleSuccess(message);
             setTimeout(() => {
                 navigate('/home');
