@@ -47,8 +47,8 @@ function Profile({ setIsAuthenticated }) {
     };
 
     return (
-        <div className="dark:bg-gray-900  mt-32">
-            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md animate-fade-in-down mx-auto">
+        <div className="dark:bg-gray-900  mt-32 ">
+            <div className="bg-white shadow-2xl p-8 rounded-lg  w-full max-w-md animate-fade-in-down mx-auto">
                 <div className="flex items-start mb-6">
                     <div className="w-22 h-22 rounded-full border-4 border-blue-200 hover:border-blue-300 transition-all duration-300">
                         <Avatar sx={{ bgcolor: teal[600], width: 80, height: 80 }}>
@@ -61,7 +61,7 @@ function Profile({ setIsAuthenticated }) {
                         <p className="text-gray-600 mt-1">{user.bio}</p>
                     </div>
                 </div>
-
+ 
                 <div className="mb-6">
                     <div className="flex border-b border-gray-200">
                         <button

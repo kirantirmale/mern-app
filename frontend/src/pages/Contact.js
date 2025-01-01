@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify'; // Import react-toastify
 import 'react-toastify/dist/ReactToastify.css'; // Import the toastify CSS
-
+import home from "../assets/images/home.jpg"
 function Contact() {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -62,12 +62,20 @@ function Contact() {
 
     return (
         <>
-            <div className="p-5">
-                <div className="mx-auto max-w-2xl text-center">
-                    <h2 className="text-balance text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Contact sales</h2>
+            <div className="p-5"
+             style={{
+                      backgroundImage: `url(${home})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+
+            >
+                <form onSubmit={handleSubmit} method="POST" className="mx-auto max-w-xl  bg-red-50 px-6 py-8  rounded-lg shadow dark:border ">
+                <div className="mx-auto mb-2">
+                    <h2 className="text-balance  font-mono tracking-tight text-gray-900 text-5xl ">Contact</h2>
                 </div>
-                <form onSubmit={handleSubmit} method="POST" className="mx-auto max-w-xl sm:mt-20">
-                    <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div className=" grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>
                             <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900">
                                 First name
@@ -77,10 +85,11 @@ function Contact() {
                                     id="first-name"
                                     name="firstName"
                                     type="text"
+                                    placeholder="firstName"
                                     autoComplete="given-name"
                                     value={formData.firstName}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                                    className="block w-full rounded-md bg-teal-200 bg-opacity-20  px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-600 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                                 />
                             </div>
                         </div>
@@ -93,10 +102,11 @@ function Contact() {
                                     id="last-name"
                                     name="lastName"
                                     type="text"
+                                    placeholder="lastName"
                                     autoComplete="family-name"
                                     value={formData.lastName}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                                    className="block w-full bg-teal-200 bg-opacity-20 rounded-md  px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-600 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                                 />
                             </div>
                         </div>
@@ -110,10 +120,11 @@ function Contact() {
                                     id="email"
                                     name="email"
                                     type="email"
+                                    placeholder="email"
                                     autoComplete="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                                    className="block w-full rounded-md bg-teal-200 bg-opacity-20 px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-600 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                                 />
                             </div>
                         </div>
@@ -122,14 +133,14 @@ function Contact() {
                                 Phone number
                             </label>
                             <div className="mt-2.5">
-                                <div className="flex rounded-md bg-white outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
+                                <div className="flex rounded-md bg-teal-200 bg-opacity-20 outline outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
                                     <div className="grid shrink-0 grid-cols-1 focus-within:relative">
                                         <select
                                             id="country"
                                             name="country"
                                             autoComplete="country"
                                             aria-label="Country"
-                                            className="col-start-1 row-start-1 w-full appearance-none rounded-md py-2 pl-3.5 pr-7 text-base text-gray-500 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                            className="col-start-1 row-start-1 w-full  bg-teal-200 bg-opacity-20 appearance-none rounded-md py-2 pl-3.5 pr-7 text-base text-black placeholder:text-gray-600 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                             value={formData.country}
                                             onChange={handleChange}
                                         >
@@ -146,7 +157,7 @@ function Contact() {
                                         placeholder="(123) 456-7890"
                                         value={formData.phoneNumber}
                                         onChange={handleChange}
-                                        className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                                        className="block min-w-0 grow py-1.5 pl-1 bg-teal-200 bg-opacity-20 pr-3 text-base text-gray-900 placeholder:text-gray-600 focus:outline focus:outline-0 sm:text-sm/6"
                                     />
                                 </div>
                             </div>
@@ -159,10 +170,11 @@ function Contact() {
                                 <textarea
                                     id="message"
                                     name="message"
+                                    placeholder="message"
                                     rows={4}
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+                                    className="block w-full rounded-md bg-teal-200 bg-opacity-20 px-3.5 py-2 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-600 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
                                 />
                             </div>
                         </div>

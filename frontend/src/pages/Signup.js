@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { handleError, handleSuccess } from '../utils';
+import backgroundImage from "../assets/images/bg-image.jpg"
+import sigimg from "../assets/images/signup1.jpg"
 
 function Signup() {
     const [formData, setFormData] = useState({
@@ -66,9 +68,24 @@ function Signup() {
     };
 
     return (
-        <section className="bg-teal-500 h-screen w-full flex items-center justify-center">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-full sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg">
-                <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <section
+
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            }}
+            className="bg-teal-500 h-screen w-full flex items-center justify-center">
+            <div className=" flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-full sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg">
+                <div
+                    style={{
+                        sigimg: `url(${sigimg})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                    }}
+                    className="w-full bg-teal-900 bg-opacity-55 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold text-gray-900">Create an account</h1>
                         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -83,7 +100,7 @@ function Signup() {
                                     value={formData.firstname}
                                     onChange={handleChange}
                                     placeholder="John"
-                                    className="bg-gray-50 border rounded-lg p-2.5 w-full"
+                                    className="  bg-teal-200 bg-opacity-20 border rounded-lg p-2.5 w-full"
                                     required
                                 />
                             </div>
@@ -98,7 +115,7 @@ function Signup() {
                                     value={formData.lastname}
                                     onChange={handleChange}
                                     placeholder="Doe"
-                                    className="bg-gray-50 border rounded-lg p-2.5 w-full"
+                                    className="bg-teal-200 bg-opacity-20 border rounded-lg p-2.5 w-full"
                                     required
                                 />
                             </div>
@@ -113,7 +130,7 @@ function Signup() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="name@example.com"
-                                    className="bg-gray-50 border rounded-lg p-2.5 w-full"
+                                    className="bg-teal-200 bg-opacity-20 border rounded-lg p-2.5 w-full"
                                     required
                                 />
                             </div>
@@ -128,18 +145,18 @@ function Signup() {
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="••••••••"
-                                    className="bg-gray-50 border rounded-lg p-2.5 w-full"
+                                    className="bg-teal-200 bg-opacity-20 border rounded-lg p-2.5 w-full"
                                     required
                                 />
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-blue-500 hover:bg-blue-700 text-white rounded px-5 py-2.5"
+                                className="w-full bg-pink-300 hover:bg-red-300 text-white rounded px-5 py-2.5"
                             >
                                 Create an account
                             </button>
-                            <p className="text-sm text-gray-500">
-                                Already have an account?{' '}
+                            <p className="text-sm text-white ">
+                                Already have an account.? {' '}
                                 <Link to="/login" className="text-blue-600 hover:underline">
                                     Login here
                                 </Link>
