@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import kiran from "../assets/images/kiran.png";
 import { Link } from 'react-router-dom';
-
+import pdf from '../assets/images/KiranTirmale-CV.pdf'
 function Home() {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 ">
@@ -192,8 +192,8 @@ function Home() {
           <div className="text-center space-x-4">
             {/* Download CV Button */}
             <a
-              href="../assets/images/KiranTirmale-CV.pdf"
-              download="../assets/images/KiranTirmale-CV.pdf"
+              href={pdf}
+              download="KiranTirmale-CV.pdf"
               className="bg-teal-500 text-white py-2 px-6 rounded-lg hover:bg-teal-600"
             >
               Download CV
