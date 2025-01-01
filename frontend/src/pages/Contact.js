@@ -73,7 +73,7 @@ function Contact() {
             >
                 <form onSubmit={handleSubmit} method="POST" className="mx-auto max-w-xl  bg-red-50 px-6 py-8  rounded-lg shadow dark:border ">
                 <div className="mx-auto mb-2">
-                    <h2 className="text-balance  font-mono tracking-tight text-gray-900 text-5xl ">Contact</h2>
+                    <h2 className="text-balance  font-mono tracking-tight text-gray-900 text-5xl ">Contact Form</h2>
                 </div>
                     <div className=" grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                         <div>

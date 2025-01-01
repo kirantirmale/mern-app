@@ -1,5 +1,6 @@
 import React from 'react';
 import kiran from "../assets/images/kiran.png";
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -60,70 +61,70 @@ function Home() {
 
       {/* Work Experience & Education*/}
       <section id="work-education" className="py-16 text-black">
-  <div className="container mx-auto px-4">
-    <h2 className="text-4xl font-extrabold text-center mb-8">Work & Education</h2>
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-extrabold text-center mb-8">Work & Education</h2>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {/* Work Experience */}
-      <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-        <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">Jan 2024 - July 2024</h3>
-        <h4 className="font-semibold text-gray-300 text-lg mb-2">Software Engineer</h4>
-        <p className="text-gray-400 mb-2">Company - Opash Software, Surat</p>
-        <p className="text-gray-300">
-          Software developers are the architects of the digital world, responsible for creating the applications and systems that power our everyday lives, and data structures, using these tools to craft innovative solutions to complex problems.
-        </p>
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Work Experience */}
+            <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">Jan 2024 - July 2024</h3>
+              <h4 className="font-semibold text-gray-300 text-lg mb-2">Software Engineer</h4>
+              <p className="text-gray-400 mb-2">Company - Opash Software, Surat</p>
+              <p className="text-gray-300">
+                Software developers are the architects of the digital world, responsible for creating the applications and systems that power our everyday lives, and data structures, using these tools to craft innovative solutions to complex problems.
+              </p>
+            </div>
 
-      <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-        <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">June 2022 - Feb 2023</h3>
-        <h4 className="font-semibold text-gray-300 text-lg mb-2">Full-Stack Developer - Course</h4>
-        <p className="text-gray-400 mb-2">OSCAR CAREER POINT</p>
-        <p className="text-gray-300">
-          Full-stack developers are versatile professionals who possess a comprehensive understanding of both front-end and back-end technologies in software development.
-        </p>
-      </div>
+            <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">June 2022 - Feb 2023</h3>
+              <h4 className="font-semibold text-gray-300 text-lg mb-2">Full-Stack Developer - Course</h4>
+              <p className="text-gray-400 mb-2">OSCAR CAREER POINT</p>
+              <p className="text-gray-300">
+                Full-stack developers are versatile professionals who possess a comprehensive understanding of both front-end and back-end technologies in software development.
+              </p>
+            </div>
 
-      <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-        <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">March 2021 - June 2022</h3>
-        <h4 className="font-semibold text-gray-300 text-lg mb-2">Frontend Developer</h4>
-        <p className="text-gray-400 mb-2">Company - Teleperformance, Vadodara</p>
-        <p className="text-gray-300">
-          Frontend developers are the creative minds behind the user interfaces of websites and applications, shaping the way users interact with digital products.
-        </p>
-      </div>
-    </div>
+            <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">March 2021 - June 2022</h3>
+              <h4 className="font-semibold text-gray-300 text-lg mb-2">Frontend Developer</h4>
+              <p className="text-gray-400 mb-2">Company - Teleperformance, Vadodara</p>
+              <p className="text-gray-300">
+                Frontend developers are the creative minds behind the user interfaces of websites and applications, shaping the way users interact with digital products.
+              </p>
+            </div>
+          </div>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-      {/* Education */}
-      <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-        <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">June 2023 - Present</h3>
-        <h4 className="font-semibold text-gray-300 text-lg mb-2">Master of Computer Applications (MCA)</h4>
-        <p className="text-gray-400 mb-2">RKDF University</p>
-        <p className="text-gray-300">
-          A Master of Computer Applications (MCA) degree equips individuals with advanced knowledge and skills in the field of computer science and software development.
-        </p>
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+            {/* Education */}
+            <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">June 2023 - Present</h3>
+              <h4 className="font-semibold text-gray-300 text-lg mb-2">Master of Computer Applications (MCA)</h4>
+              <p className="text-gray-400 mb-2">RKDF University</p>
+              <p className="text-gray-300">
+                A Master of Computer Applications (MCA) degree equips individuals with advanced knowledge and skills in the field of computer science and software development.
+              </p>
+            </div>
 
-      <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-        <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">July 2019 - June 2022</h3>
-        <h4 className="font-semibold text-gray-300 text-lg mb-2">Bachelor of Computer Applications (BCA)</h4>
-        <p className="text-gray-400 mb-2">NMU University</p>
-        <p className="text-gray-300">
-          A Bachelor of Computer Applications (BCA) degree provides students with a strong foundation in computer science, software development, and information technology.
-        </p>
-      </div>
+            <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">July 2019 - June 2022</h3>
+              <h4 className="font-semibold text-gray-300 text-lg mb-2">Bachelor of Computer Applications (BCA)</h4>
+              <p className="text-gray-400 mb-2">NMU University</p>
+              <p className="text-gray-300">
+                A Bachelor of Computer Applications (BCA) degree provides students with a strong foundation in computer science, software development, and information technology.
+              </p>
+            </div>
 
-      <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
-        <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">July 2017 - June 2019</h3>
-        <h4 className="font-semibold text-gray-300 text-lg mb-2">High School</h4>
-        <p className="text-gray-400 mb-2">RDMP High School</p>
-        <p className="text-gray-300">
-          High school education forms the foundation for students' academic and personal growth, providing a diverse range of subjects and opportunities for learning.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+            <div className="bg-black p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-2xl font-semibold text-white mb-4 transform transition-all duration-300 hover:text-indigo-400">July 2017 - June 2019</h3>
+              <h4 className="font-semibold text-gray-300 text-lg mb-2">High School</h4>
+              <p className="text-gray-400 mb-2">RDMP High School</p>
+              <p className="text-gray-300">
+                High school education forms the foundation for students' academic and personal growth, providing a diverse range of subjects and opportunities for learning.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* My Projects */}
@@ -156,19 +157,27 @@ function Home() {
         </div>
       </section> */}
 
-<section id="hire-me" className="py-16 bg-gray-900 text-white">
-  <div className="container mx-auto px-4">
-    <h2 className="text-4xl font-extrabold text-center mb-8">Hire Me</h2>
-    <div className="text-center">
-      <a href="assets/images/KiranTirmale-CV.pdf" 
-         target="_blank" 
-         download="KiranTirmale-CV.pdf" 
-         className="bg-teal-500 text-white py-2 px-6 rounded-lg hover:bg-teal-600">
-        Download CV
-      </a>
-    </div>
-  </div>
-</section>
+      <section id="hire-me" className="py-16 bg-gray-900 text-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-extrabold text-center mb-8">Hire Me</h2>
+          <div className="text-center space-x-4">
+            {/* Download CV Button */}
+            <a href="/assets/images/KiranTirmale-CV.pdf"
+              download="KiranTirmale-CV.pdf"
+              className="bg-teal-500 text-white py-2 px-6 rounded-lg hover:bg-teal-600">
+              Download CV
+            </a>
+
+
+            {/* Contact Me Button */}
+            <Link to="/Contact"
+              className="bg-teal-500 text-white py-2 px-6 rounded-lg hover:bg-teal-600">
+              Contact Me
+            </Link>
+          </div>
+        </div>
+      </section>
+
 
 
 
