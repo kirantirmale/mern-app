@@ -14,6 +14,8 @@ function Contact() {
         country: 'IN',
     });
 
+    const [loading, setLoading] = useState(false); // State to manage loader
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -24,6 +26,7 @@ function Contact() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Start loader
         try {
             const response = await fetch('https://mern-app-api-xi.vercel.app/contact', {
                 method: 'POST',
@@ -53,6 +56,8 @@ function Contact() {
         } catch (error) {
             console.error('Error:', error);
             toast.error('An error occurred while submitting the form. Please try again later.');
+        } finally {
+            setLoading(false); // Stop loader
         }
     };
 
@@ -78,6 +83,8 @@ function Contact() {
                         <h2 className="text-balance font-mono tracking-tight text-gray-900 text-5xl">Contact Form</h2>
                     </div>
                     <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                        {/* Input fields */}
+                        {/* First Name */}
                         <motion.div
                             initial={{ x: -50, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
@@ -100,6 +107,7 @@ function Contact() {
                             </div>
                         </motion.div>
 
+                        {/* Last Name */}
                         <motion.div
                             initial={{ x: 50, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
@@ -216,8 +224,9 @@ function Contact() {
                         <button
                             type="submit"
                             className="block w-full rounded-md bg-teal-500 px-3.5 py-2.5 text-center text-sm font-semibold text-teal-200 shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            disabled={loading}
                         >
-                            Let's talk
+                            {loading ? 'Submitting...' : "Let's talk"}
                         </button>
                     </motion.div>
                 </motion.form>

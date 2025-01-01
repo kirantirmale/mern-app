@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Avatar from '@mui/material/Avatar';
@@ -12,6 +12,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const location = useLocation(); // Get current location to check active route
+  const menuRef = useRef(null); // Reference for the menu
 
   useEffect(() => {
     const fullName = localStorage.getItem('LoggedInUser') || 'Guest';
@@ -24,6 +25,23 @@ function Header() {
     setMenuOpen(!menuOpen);
   };
 
+  // Close menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
   // Function to check if the current route matches the link
   const getLinkClass = (path) => {
     return location.pathname === path
@@ -33,7 +51,7 @@ function Header() {
 
   return (
     <header className="bg-slate-950 p-6">
-      <nav className="flex items-center justify-between flex-wrap">
+      <nav className="flex items-center justify-between flex-wrap" ref={menuRef}>
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <span className="font-semibold text-xl tracking-tight ml-2">
             <img src={logo} alt="Logo" className="h-10" />
