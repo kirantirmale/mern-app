@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Avatar from '@mui/material/Avatar';
 import { teal } from '@mui/material/colors';
@@ -10,6 +10,8 @@ function Header() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const location = useLocation(); // Get current location to check active route
 
   useEffect(() => {
     const fullName = localStorage.getItem('LoggedInUser') || 'Guest';
@@ -22,10 +24,16 @@ function Header() {
     setMenuOpen(!menuOpen);
   };
 
-  return (
-    <header className="bg-teal-500 p-6">
-      <nav className="flex items-center justify-between flex-wrap">
+  // Function to check if the current route matches the link
+  const getLinkClass = (path) => {
+    return location.pathname === path
+      ? 'text-teal-500 font-semibold'
+      : 'text-gray-300 hover:text-white';
+  };
 
+  return (
+    <header className="bg-slate-950 p-6">
+      <nav className="flex items-center justify-between flex-wrap">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <span className="font-semibold text-xl tracking-tight ml-2">
             <img src={logo} alt="Logo" className="h-10" />
@@ -48,22 +56,21 @@ function Header() {
           <div className="text-base lg:flex-grow">
             <Link
               to="/home"
-              className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${getLinkClass('/home')}`}
             >
-              Home
+              HOME
             </Link>
             <Link
               to="/skills"
-              className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${getLinkClass('/skills')}`}
             >
-              Skills
+              SKILLS
             </Link>
-
             <Link
               to="/contact"
-              className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+              className={`block mt-4 lg:inline-block lg:mt-0 mr-4 ${getLinkClass('/contact')}`}
             >
-              Contact
+              CONTACT
             </Link>
           </div>
           <div className="flex justify-center items-center mt-4 lg:mt-0 -ml-4">
