@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Contact = require('../models/ContactModel'); // Import the model
+const Contact = require('../models/ContactModel');
 
 // Handle POST request for contact form
 router.post('/', async (req, res) => {

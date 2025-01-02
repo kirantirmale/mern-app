@@ -77,7 +77,7 @@ function Login() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
-            className="bg-teal-500 h-screen w-full flex items-center justify-center relative">
+            className="h-screen w-full flex items-center justify-center relative">
             {/* Full-page loader */}
             {loading && (
                 <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
