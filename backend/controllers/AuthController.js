@@ -15,6 +15,7 @@ const transporter = nodemailer.createTransport({
 const signup = async (req, res) => {
     try {
         const { firstname, lastname, email, password } = req.body;
+        const data = await User.create(req.body);
         const userModel = new User({
             firstname,
             lastname,
@@ -28,7 +29,7 @@ const signup = async (req, res) => {
             from: process.env.EMAIL_USER,
             to: email,
             subject: 'Profile Successfully Created on Kiran Tirmale Portfolio',
-            text: `Dear ${firstname.toUpperCase()},\n\nYour profile has been successfully created on : https://mern-app-ui-kirantirmales-projects.vercel.app/login\n\nNow you can login on the above link with the help of your reference ID.\n\nYour reference ID is: ${email}\n\nYour password is: ${password}\n\nThank you,\n,Kiran Tirmale`
+            text: `Dear ${firstname.toUpperCase()},\n\nYour profile has been successfully created on https://mern-app-ui-kirantirmales-projects.vercel.app/login\n\nNow you can login on the above link with the help of your reference ID.\n\nYour reference ID is: ${email}\n\nYour password is: ${password}\n\nThank you,\nKiran Tirmale`
         };
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -37,7 +38,13 @@ const signup = async (req, res) => {
                 console.log('Email sent: ' + info.response);
             }
         });
-       
+        const user = await User.findOne({ email });
+        if (user) {
+            return res.status(409).json({ message: 'User already exists', success: false });
+        }
+
+
+
         res.status(201).json({ message: 'Signup successful', success: true });
     } catch (error) {
         res.status(500).json({ message: error.message || 'Internal Server Error', success: false });
