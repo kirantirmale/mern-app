@@ -37,13 +37,7 @@ const signup = async (req, res) => {
                 console.log('Email sent: ' + info.response);
             }
         });
-        const user = await User.findOne({ email });
-        if (user) {
-            return res.status(409).json({ message: 'User already exists', success: false });
-        }
-
-
-
+       
         res.status(201).json({ message: 'Signup successful', success: true });
     } catch (error) {
         res.status(500).json({ message: error.message || 'Internal Server Error', success: false });
