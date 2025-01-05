@@ -16,38 +16,48 @@ const signup = async (req, res) => {
     try {
         const { firstname, lastname, email, password } = req.body;
 
+        // Normalize email to lowercase
+        const normalizedEmail = email.toLowerCase();
+
+        // Check if the user exists
+        const user = await User.findOne({ email: normalizedEmail });
+        if (user) {
+            return res.status(409).json({ message: 'User already exists', success: false });
+        }
+
+        // Hash password and create new user
         const userModel = new User({
             firstname,
             lastname,
-            email,
+            email: normalizedEmail,
             password: await bcrypt.hash(password, 10),
         });
 
         await userModel.save();
 
+        // Send welcome email
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: "kirantirmale2362001@gmail.com",
             to: userModel.email,
             subject: 'Profile Successfully Created on Kiran Tirmale Portfolio',
             text: `Dear ${userModel.firstname.toUpperCase()},\n\nYour profile has been successfully created on https://mern-app-ui-kirantirmales-projects.vercel.app/login\n\nNow you can login on the above link with the help of your reference ID.\n\nYour reference ID is: ${userModel.email}\n\nThank you,\nKiran Tirmale`
         };
+
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
+                console.error('Error sending email:', error);
             } else {
-                console.log('Email sent: ' + info.response);
+                console.log('Email sent:', info.response);
             }
         });
-        const user = await User.findOne({ email });
-        if (user) {
-            return res.status(409).json({ message: 'User already exists', success: false });
-        }
 
         res.status(201).json({ message: 'Signup successful', success: true });
     } catch (error) {
+        console.error('Error during signup:', error);
         res.status(500).json({ message: error.message || 'Internal Server Error', success: false });
     }
 };
+
 
 
 const login = async (req, res) => {
