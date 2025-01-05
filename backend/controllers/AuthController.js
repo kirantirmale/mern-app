@@ -1,33 +1,55 @@
-
+require('dotenv').config();
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 const signup = async (req, res) => {
     try {
-      const { firstname, lastname, email, password } = req.body;
-  
-      const user = await User.findOne({ email });
-      if (user) {
-        return res.status(409).json({ message: 'User already exists', success: false });
-      }
-  
-      const userModel = new User({
-        firstname,
-        lastname,
-        email,
-        password: await bcrypt.hash(password, 10),
-      });
-  
-      await userModel.save();
-  
-      res.status(201).json({ message: 'Signup successful', success: true });
+        const { firstname, lastname, email, password } = req.body;
+        const userModel = new User({
+            firstname,
+            lastname,
+            email,
+            password: await bcrypt.hash(password, 10),
+        });
+
+        await userModel.save();
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Profile Successfully Created on Kiran Tirmale Portfolio',
+            text: `Dear ${firstname.toUpperCase()},\n\nYour profile has been successfully created on : https://mern-app-ui-kirantirmales-projects.vercel.app/login\n\nNow you can login on the above link with the help of your reference ID.\n\nYour reference ID is: ${email}\n\nYour password is: ${password}\n\nThank you,\n,Kiran Tirmale`
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+        const user = await User.findOne({ email });
+        if (user) {
+            return res.status(409).json({ message: 'User already exists', success: false });
+        }
+
+
+
+        res.status(201).json({ message: 'Signup successful', success: true });
     } catch (error) {
-      res.status(500).json({ message: error.message || 'Internal Server Error', success: false });
+        res.status(500).json({ message: error.message || 'Internal Server Error', success: false });
     }
-  };
-  
+};
+
 
 const login = async (req, res) => {
     try {
