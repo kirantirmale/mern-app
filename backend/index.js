@@ -13,7 +13,7 @@ const ContactRoter =  require('./routes/ContactRoter');
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/auth', AuthRouter);
-app.use('/contact', ContactRoter);
+app.use('/contact', ContactRoter); 
 
 app.get('/ping', (req, res) => {
     res.send('Hello Pong');

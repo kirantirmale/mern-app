@@ -37,7 +37,7 @@ const signup = async (req, res) => {
 
 
         const mailOptions = {
-            from: "kirantirmale2362001@gmail.com",
+            from: process.env.EMAIL_USER,
             to: userModel.email,
             subject: 'Profile Successfully Created on Kiran Tirmale Portfolio',
             text: `Dear ${userModel.firstname.toUpperCase()},\n\nYour profile has been successfully created on https://mern-app-ui-kirantirmales-projects.vercel.app/login\n\nNow you can login on the above link with the help of your reference ID.\n\nYour reference ID is: ${userModel.email}\n\nThank you,\nKiran Tirmale`
