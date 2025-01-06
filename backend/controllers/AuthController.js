@@ -1,31 +1,31 @@
-
+require('dotenv').config();
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-        user: "kirantirmale2362001@gmail.com",
-        pass: "lidb gion tcly dubu"
-    }
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
 });
 
 const signup = async (req, res) => {
     try {
         const { firstname, lastname, email, password } = req.body;
 
-        // Normalize email to lowercase
         const normalizedEmail = email.toLowerCase();
 
-        // Check if the user exists
         const user = await User.findOne({ email: normalizedEmail });
         if (user) {
             return res.status(409).json({ message: 'User already exists', success: false });
         }
 
-        // Hash password and create new user
+
         const userModel = new User({
             firstname,
             lastname,
@@ -35,7 +35,7 @@ const signup = async (req, res) => {
 
         await userModel.save();
 
-        // Send welcome email
+
         const mailOptions = {
             from: "kirantirmale2362001@gmail.com",
             to: userModel.email,
