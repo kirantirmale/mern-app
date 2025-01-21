@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons
 import 'react-toastify/dist/ReactToastify.css';
 import { handleError, handleSuccess } from '../utils';
-import backgroundImage from "../assets/images/bg-image.jpg";
+// import backgroundImage from "../assets/images/bg-image.jpg";
 import { Fade, Zoom } from '@mui/material'; // MUI animations
 
 function Login() {
@@ -78,13 +78,13 @@ function Login() {
 
     return (
         <section
-            style={{
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-            }}
-            className="h-screen w-full flex items-center justify-center relative"
+            // style={{
+            //     backgroundImage: `url(${backgroundImage})`,
+            //     backgroundSize: 'cover',
+            //     backgroundPosition: 'center',
+            //     backgroundRepeat: 'no-repeat',
+            // }}
+            className="h-screen w-full flex bg-black items-center justify-center relative"
         >
             {/* Full-page loader */}
             {loading && (
@@ -97,7 +97,7 @@ function Login() {
 
             <Zoom in={isMounted} timeout={500}>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-full sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg">
-                    <div className="w-full bg-teal-900 bg-opacity-55 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-full bg-white  rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Sign in to your account
@@ -151,14 +151,14 @@ function Login() {
                                 <button
                                     disabled={loading}
                                     type="submit"
-                                    className="w-full bg-pink-300 hover:bg-red-300 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-white rounded"
+                                    className="w-full bg-black hover:bg-emerald-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm px-5 py-2.5 text-white rounded"
                                 >
                                     {loading ? "Signing in..." : "Sign in"}
                                 </button>
 
-                                <p className="text-sm font-light text-white dark:text-gray-400">
+                                <p className="text-sm font-light text-black dark:text-gray-400">
                                     Don’t have an account yet ?{' '}
-                                    <Link to="/signup" className="font-medium text-black hover:underline dark:text-primary-500">
+                                    <Link to="/signup" className="font-medium text-blue-700 hover:underline dark:text-primary-500">
                                         Sign up
                                     </Link>
                                 </p>
