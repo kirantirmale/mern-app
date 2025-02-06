@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import kiran from "../assets/images/kiran.png";
 import { Link } from 'react-router-dom';
-import pdf from '../assets/images/KiranTirmale-CV.pdf'
+import pdf from '../assets/images/KiranTirmaleResume.pdf'
 function Home() {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 ">
