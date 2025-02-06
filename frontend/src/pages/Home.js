@@ -193,7 +193,7 @@ function Home() {
             {/* Download CV Button */}
             <a
               href={pdf}
-              download="KiranTirmale-CV.pdf"
+              download="KiranTirmaleResume.pdf"
               className="bg-teal-500 text-white py-2 px-6 rounded-lg hover:bg-teal-600"
             >
               Download CV
