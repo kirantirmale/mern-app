@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import 'react-toastify/dist/ReactToastify.css';
 import { handleError, handleSuccess } from '../utils';
-// import backgroundImage from "../assets/images/bg-image.jpg";
-import { Fade, Zoom } from '@mui/material'; // MUI animations
+import { Fade, Zoom } from '@mui/material';
 
 function Login() {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+        email: 'demo@gmail.com',
+        password: 'Demo@123',
     });
-    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-    const [isMounted, setIsMounted] = useState(false); // To control animations
+    const [showPassword, setShowPassword] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const navigate = useNavigate();
 
     React.useEffect(() => {
-        setIsMounted(true); // Trigger animations when component mounts
+        setIsMounted(true);
     }, []);
 
     const handleChange = (e) => {
@@ -62,7 +61,7 @@ function Login() {
 
             const { jwtToken, firstname = '', lastname = '', email = '', message } = result;
             localStorage.setItem('token', jwtToken);
-            localStorage.setItem('LoggedInUser', `${firstname} ${lastname} ,${email}`);
+            localStorage.setItem('LoggedInUser', `${firstname} ${lastname}, ${email}`);
             handleSuccess(message);
             setTimeout(() => {
                 navigate('/home');
@@ -77,16 +76,7 @@ function Login() {
     };
 
     return (
-        <section
-            // style={{
-            //     backgroundImage: `url(${backgroundImage})`,
-            //     backgroundSize: 'cover',
-            //     backgroundPosition: 'center',
-            //     backgroundRepeat: 'no-repeat',
-            // }}
-            className="h-screen w-full flex bg-black items-center justify-center relative"
-        >
-            {/* Full-page loader */}
+        <section className="h-screen w-full flex bg-black items-center justify-center relative">
             {loading && (
                 <Fade in={loading} timeout={500}>
                     <div className="absolute inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
@@ -97,7 +87,7 @@ function Login() {
 
             <Zoom in={isMounted} timeout={500}>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-full sm:max-w-md md:max-w-lg lg:max-w-md xl:max-w-lg">
-                    <div className="w-full bg-white  rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Sign in to your account
@@ -157,7 +147,7 @@ function Login() {
                                 </button>
 
                                 <p className="text-sm font-light text-black dark:text-gray-400">
-                                    Don’t have an account yet ?{' '}
+                                    Don’t have an account yet?{' '}
                                     <Link to="/signup" className="font-medium text-blue-700 hover:underline dark:text-primary-500">
                                         Sign up
                                     </Link>
