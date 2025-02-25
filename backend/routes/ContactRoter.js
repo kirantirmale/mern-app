@@ -5,16 +5,11 @@ const Contact = require('../models/ContactModel');
 // Handle POST request for contact form
 router.post('/', async (req, res) => {
     try {
-        const { firstName, lastName, email, phoneNumber, message, country } = req.body;
+        const {  name, email, phone, budget, message} = req.body;
 
         // Create a new contact entry
         const newContact = new Contact({
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            message,
-            country
+             name, email, phone, budget, message
         });
 
         // Save the contact to the database
